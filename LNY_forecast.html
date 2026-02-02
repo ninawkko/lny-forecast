@@ -1,0 +1,183 @@
+import { useState } from 'react';
+import { Sparkles, Calendar } from 'lucide-react';
+
+export default function ChineseZodiacApp() {
+  const [birthDate, setBirthDate] = useState('');
+  const [result, setResult] = useState(null);
+
+  const zodiacAnimals = [
+    { name: 'Rat', emoji: '🐀', color: 'from-blue-500 to-indigo-600' },
+    { name: 'Ox', emoji: '🐂', color: 'from-yellow-600 to-orange-600' },
+    { name: 'Tiger', emoji: '🐅', color: 'from-orange-500 to-red-600' },
+    { name: 'Rabbit', emoji: '🐇', color: 'from-pink-500 to-rose-600' },
+    { name: 'Dragon', emoji: '🐉', color: 'from-red-500 to-pink-600' },
+    { name: 'Snake', emoji: '🐍', color: 'from-green-500 to-emerald-600' },
+    { name: 'Horse', emoji: '🐴', color: 'from-amber-500 to-yellow-600' },
+    { name: 'Goat', emoji: '🐐', color: 'from-teal-500 to-cyan-600' },
+    { name: 'Monkey', emoji: '🐵', color: 'from-purple-500 to-violet-600' },
+    { name: 'Rooster', emoji: '🐓', color: 'from-red-600 to-orange-600' },
+    { name: 'Dog', emoji: '🐕', color: 'from-brown-500 to-amber-700' },
+    { name: 'Pig', emoji: '🐖', color: 'from-pink-600 to-rose-700' }
+  ];
+
+  const lunarNewYearDates = {
+    1924: '02-05', 1925: '01-24', 1926: '02-13', 1927: '02-02', 1928: '01-23',
+    1929: '02-10', 1930: '01-30', 1931: '02-17', 1932: '02-06', 1933: '01-26',
+    1934: '02-14', 1935: '02-04', 1936: '01-24', 1937: '02-11', 1938: '01-31',
+    1939: '02-19', 1940: '02-08', 1941: '01-27', 1942: '02-15', 1943: '02-05',
+    1944: '01-25', 1945: '02-13', 1946: '02-02', 1947: '01-22', 1948: '02-10',
+    1949: '01-29', 1950: '02-17', 1951: '02-06', 1952: '01-27', 1953: '02-14',
+    1954: '02-03', 1955: '01-24', 1956: '02-12', 1957: '01-31', 1958: '02-18',
+    1959: '02-08', 1960: '01-28', 1961: '02-15', 1962: '02-05', 1963: '01-25',
+    1964: '02-13', 1965: '02-02', 1966: '01-21', 1967: '02-09', 1968: '01-30',
+    1969: '02-17', 1970: '02-06', 1971: '01-27', 1972: '02-15', 1973: '02-03',
+    1974: '01-23', 1975: '02-11', 1976: '01-31', 1977: '02-18', 1978: '02-07',
+    1979: '01-28', 1980: '02-16', 1981: '02-05', 1982: '01-25', 1983: '02-13',
+    1984: '02-02', 1985: '02-20', 1986: '02-09', 1987: '01-29', 1988: '02-17',
+    1989: '02-06', 1990: '01-27', 1991: '02-15', 1992: '02-04', 1993: '01-23',
+    1994: '02-10', 1995: '01-31', 1996: '02-19', 1997: '02-07', 1998: '01-28',
+    1999: '02-16', 2000: '02-05', 2001: '01-24', 2002: '02-12', 2003: '02-01',
+    2004: '01-22', 2005: '02-09', 2006: '01-29', 2007: '02-18', 2008: '02-07',
+    2009: '01-26', 2010: '02-14', 2011: '02-03', 2012: '01-23', 2013: '02-10',
+    2014: '01-31', 2015: '02-19', 2016: '02-08', 2017: '01-28', 2018: '02-16',
+    2019: '02-05', 2020: '01-25', 2021: '02-12', 2022: '02-01', 2023: '01-22',
+    2024: '02-10', 2025: '01-29', 2026: '02-17', 2027: '02-06', 2028: '01-26',
+    2029: '02-13', 2030: '02-03'
+  };
+
+  const fortunes = {
+    'Rat': 'The Year of the Horse brings exciting opportunities for adventure! Your natural cleverness will help you navigate new experiences. Expect dynamic changes in your career and social life.',
+    'Ox': 'This spirited year encourages you to step outside your comfort zone. The Horse\'s energy complements your steady nature - embrace spontaneity while maintaining your grounded approach.',
+    'Tiger': 'Two powerful spirits unite! This year amplifies your natural courage and charisma. Channel the Horse\'s momentum to achieve ambitious goals, but remember to pace yourself.',
+    'Rabbit': 'The Horse year invites you to be bolder than usual. Your diplomatic skills will shine in fast-paced situations. Balance the Horse\'s enthusiasm with your natural grace.',
+    'Dragon': 'A magnificent year ahead! The Horse\'s energy aligns beautifully with your ambitious nature. Expect recognition and success, especially in creative endeavors.',
+    'Snake': 'The Horse\'s swift energy may feel intense, but it brings opportunities for growth. Trust your intuition while embracing the dynamic pace of change around you.',
+    'Horse': 'Your zodiac year! A time of self-discovery and personal power. Embrace new beginnings, but be mindful not to gallop too quickly. Balance ambition with self-care.',
+    'Goat': 'The Horse year brings vibrant social connections and creative inspiration. Your artistic sensibilities will flourish. Collaborate with others to maximize success.',
+    'Monkey': 'An exciting year of innovation and play! The Horse\'s energy matches your adventurous spirit. Your wit and adaptability will open unexpected doors.',
+    'Rooster': 'The dynamic Horse year rewards your hardworking nature with exciting developments. Stay organized amid the whirlwind, and your diligence will pay off handsomely.',
+    'Dog': 'Loyalty meets liberty this year! The Horse\'s free spirit encourages you to explore while maintaining your core values. Trust your instincts in new situations.',
+    'Pig': 'A year of joyful abundance! The Horse\'s energy brings social opportunities and pleasant surprises. Your generous nature will be especially appreciated and rewarded.'
+  };
+
+  const getZodiac = (dateString) => {
+    const birthDate = new Date(dateString);
+    const year = birthDate.getFullYear();
+    const monthDay = `${String(birthDate.getMonth() + 1).padStart(2, '0')}-${String(birthDate.getDate()).padStart(2, '0')}`;
+
+    const lunarNewYear = lunarNewYearDates[year];
+
+    let zodiacYear = year;
+    if (lunarNewYear && monthDay < lunarNewYear) {
+      zodiacYear = year - 1;
+    }
+
+    const baseYear = 1924;
+    const index = (zodiacYear - baseYear) % 12;
+    const adjustedIndex = index < 0 ? index + 12 : index;
+
+    return { ...zodiacAnimals[adjustedIndex], year: zodiacYear };
+  };
+
+  const handleSubmit = () => {
+    if (!birthDate) return;
+
+    const zodiacInfo = getZodiac(birthDate);
+    const fortune = fortunes[zodiacInfo.name];
+
+    setResult({ zodiac: zodiacInfo, fortune });
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-red-600 via-rose-500 to-orange-500 p-6 flex items-center justify-center">
+      <div className="max-w-2xl w-full">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-5xl font-bold text-white mb-2 drop-shadow-lg">
+            🐴 Year of the Horse 🐴
+          </h1>
+          <p className="text-xl text-white/90 font-medium">Discover Your Fortune</p>
+          <div className="mt-6 bg-white/20 backdrop-blur-sm rounded-2xl p-6 text-white">
+            <p className="text-lg leading-relaxed">
+              Thank you for celebrating the Lunar New Year with the AAC!
+              Enjoy this fortune teller as our party favor — share the joy of the new year! 🧧
+            </p>
+          </div>
+        </div>
+
+        {/* Main Card */}
+        <div className="bg-white rounded-3xl shadow-2xl p-8 backdrop-blur-sm">
+          {!result ? (
+            <div className="space-y-6">
+              <div className="text-center mb-6">
+                <Sparkles className="w-16 h-16 mx-auto text-yellow-500 mb-4" />
+                <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                  Enter Your Birthday
+                </h2>
+                <p className="text-gray-600">
+                  Let's reveal your Chinese zodiac and fortune!
+                </p>
+              </div>
+
+              <div className="relative">
+                <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type="date"
+                  value={birthDate}
+                  onChange={(e) => setBirthDate(e.target.value)}
+                  className="w-full pl-12 pr-4 py-4 text-lg border-2 border-gray-300 rounded-xl focus:border-red-500 focus:outline-none transition-colors"
+                  style={{ colorScheme: 'light' }}
+                />
+              </div>
+
+              <button
+                onClick={handleSubmit}
+                className="w-full bg-gradient-to-r from-red-600 to-orange-600 text-white py-4 rounded-xl text-lg font-bold hover:from-red-700 hover:to-orange-700 transition-all transform hover:scale-105 shadow-lg"
+              >
+                Reveal My Fortune ✨
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-6">
+              {/* Zodiac Display */}
+              <div className={`bg-gradient-to-br ${result.zodiac.color} rounded-2xl p-8 text-center text-white shadow-lg`}>
+                <div className="text-8xl mb-4">{result.zodiac.emoji}</div>
+                <h2 className="text-4xl font-bold mb-2">Year of the {result.zodiac.name}</h2>
+                <p className="text-xl opacity-90">{result.zodiac.year}</p>
+              </div>
+
+              {/* Fortune */}
+              <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 border-2 border-orange-200">
+                <div className="flex items-center gap-2 mb-4">
+                  <Sparkles className="w-6 h-6 text-orange-600" />
+                  <h3 className="text-2xl font-bold text-gray-800">
+                    Your 2026 Fortune
+                  </h3>
+                </div>
+                <p className="text-gray-700 text-lg leading-relaxed">
+                  {result.fortune}
+                </p>
+              </div>
+
+              {/* Reset Button */}
+              <button
+                onClick={() => {
+                  setResult(null);
+                  setBirthDate('');
+                }}
+                className="w-full bg-gradient-to-r from-gray-600 to-gray-700 text-white py-3 rounded-xl font-semibold hover:from-gray-700 hover:to-gray-800 transition-all"
+              >
+                Check Another Birthday
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="text-center mt-6 text-white/90">
+          <p className="text-sm">🧧 Happy Lunar New Year! 🧧</p>
+        </div>
+      </div>
+    </div>
+  );
+}
