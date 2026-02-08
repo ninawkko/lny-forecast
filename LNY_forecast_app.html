@@ -167,13 +167,13 @@
                     />
                   </div>*/}
                   <div className="relative max-w-md mx-auto">
-                    <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                    <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
                     <input
                       type="date"
                       value={birthDate}
                       onChange={(e) => setBirthDate(e.target.value)}
-                      className="w-full pl-12 pr-4 py-4 text-base sm:text-lg border-2 border-gray-300 rounded-xl focus:border-red-500 focus:outline-none transition-colors box-border"
-                      style={{ colorScheme: 'light', maxWidth:'100%', boxSizing: 'border-box' }}
+                      className="w-full pl-12 pr-4 py-4 text-base sm:text-lg border-2 border-gray-300 rounded-xl focus:border-red-500 focus:outline-none transition-colors"
+                      style={{ colorScheme: 'light', boxSizing: 'border-box', width: '100%' }}
                     />
                   </div>
 
