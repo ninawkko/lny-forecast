@@ -180,13 +180,12 @@
                   </div>*/}
 
                   <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-                    <div className="relative" style={{ width: '250px', maxWidth: '90%', margin: '0 auto' }}>
-                      <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
+                    <div className="relative" style={{ width: '280px', maxWidth: '90%', margin: '0 auto' }}>
                       <input
                         type="date"
                         value={birthDate}
                         onChange={(e) => setBirthDate(e.target.value)}
-                        className="w-full pl-12 pr-4 py-3 text-base border-2 border-gray-300 rounded-xl focus:border-red-500 focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 text-base border-2 border-gray-300 rounded-xl focus:border-red-500 focus:outline-none transition-colors"
                         style={{ colorScheme: 'light' }}
                       />
                     </div>
