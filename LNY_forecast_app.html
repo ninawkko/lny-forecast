@@ -156,14 +156,14 @@
                     </p>
                   </div>
 
-                  <div className="relative max-w-sm mx-auto">
+                  <div className="relative">
                     <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
                     <input
                       type="date"
                       value={birthDate}
                       onChange={(e) => setBirthDate(e.target.value)}
                       className="w-full pl-12 pr-4 py-4 text-lg border-2 border-gray-300 rounded-xl focus:border-red-500 focus:outline-none transition-colors"
-                      style={{ colorScheme: 'light' }}
+                      style={{ colorScheme: 'light', minWidth:'100%' }}
                     />
                   </div>
 
